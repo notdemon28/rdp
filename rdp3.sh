@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set default username and password
-username="root"
+username="user"
 password="root"
 
 # Set default CRP value
