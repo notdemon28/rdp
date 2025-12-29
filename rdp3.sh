@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set default username and password
-username="user"
+username="root"
 password="root"
 
 # Set default CRP value
@@ -11,7 +11,6 @@ CRP=""
 Pin="123456"
 
 # Set default Autostart value
-Autostart=true
 
 echo "Creating User and Setting it up"
 sudo useradd -m "$username"
@@ -47,14 +46,6 @@ sudo apt install --assume-yes --fix-broken
 read -p "Enter CRP value: " CRP
 
 echo "Finalizing"
-if [ "$Autostart" = true ]; then
-    mkdir -p "/home/$username/.config/autostart"
-    link="https://youtu.be/d9ui27vVePY?si=TfVDVQOd0VHjUt_b"
-    colab_autostart="[Desktop Entry]\nType=Application\nName=Colab\nExec=sh -c 'sensible-browser $link'\nIcon=\nComment=Open a predefined notebook at session signin.\nX-GNOME-Autostart-enabled=true"
-    echo -e "$colab_autostart" | sudo tee "/home/$username/.config/autostart/colab.desktop"
-    sudo chmod +x "/home/$username/.config/autostart/colab.desktop"
-    sudo chown "$username:$username" "/home/$username/.config"
-fi
 
 sudo adduser "$username" chrome-remote-desktop
 command="$CRP --pin=$Pin"
